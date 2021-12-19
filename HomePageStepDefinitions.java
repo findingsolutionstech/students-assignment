@@ -1,6 +1,9 @@
-package steps;
+package stepdefs;
+
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,25 +14,26 @@ public class HomePageStepDefinitions {
 	WebDriver driver;
 	HomePage homepage;
 
-	@Given("User has browser open")
+	@Given("user has browser open")
 	public void user_has_browser_open() {
-		homepage.SetUpEnvironment();
-	}
-
-	@Then("user navigates to homepage")
-	public void user_navigates_to_homepage() {
-		homepage.browser();
-	}
-
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Tscot\\CDriver\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.navigate().to("http://demo.guru99.com/test/newtours/index.php");
+		 }
+	
+	
 	@Then("user checks if aruba image is diplayed")
 	public void user_checks_if_aruba_image_is_diplayed() {
 		homepage.validateArubaImage();
 	}
 
-	@Then("user checks if mercury page image is displayed")
-	public void user_checks_if_mercury_page_image_is_displayed() {
-		homepage.validateMercuryToursImage();
+
+	@Then("user checks if mercury image is displayed")
+	public void user_checks_if_mercury_image_is_displayed() {
+	    homepage.validateMercuryToursImage();
 	}
+
 
 	@Then("user checks if register link is working")
 	public void user_checks_if_register_link_is_working() {
